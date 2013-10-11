@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>com.tooler.jee</groupId>
+      <artifactId>ToolerJEE</artifactId>
+      <version>1.0.0</version>
+   </parent>
+
+   <artifactId>ToolerJEE-ear</artifactId>
+   <packaging>ear</packaging>
+
+   <name>[${project.parent.artifactId}] - EAR Module</name>
+
+   <dependencies>
+      <dependency>
+         <groupId>${project.groupId}</groupId>
+         <artifactId>ToolerJEE-war</artifactId>
+         <version>1.0.0</version>
+         <type>war</type>
+      </dependency>
+   </dependencies>
+   
+   <build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-ear-plugin</artifactId>
+			<configuration>
+				<generateApplicationXml>true</generateApplicationXml>
+				<initializeInOrder>true</initializeInOrder>
+				<defaultLibBundleDir>lib</defaultLibBundleDir>
+				<filtering>true</filtering>		
+				<modules>
+					<webModule>
+						<groupId>${project.parent.groupId}</groupId>
+						<artifactId>ToolerJEE-war</artifactId>
+						<contextRoot>/ToolerJEE</contextRoot>
+					</webModule>
+					</modules>
+			</configuration>
+		</plugin>			
+      	  	<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<configuration>
+				<source>1.6</source>
+				<target>1.6</target>
+			</configuration>
+		</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-ear-plugin
+										</artifactId>
+										<versionRange>
+											[2.5,)
+										</versionRange>
+										<goals>
+											<goal>
+												generate-application-xml
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.ericsson.maven.plugins
+										</groupId>
+										<artifactId>
+											rstate-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0,)
+										</versionRange>
+										<goals>
+											<goal>rstate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
