@@ -1,3 +1,6 @@
+# intellij files
+*.iml
+
 # eclipse files
 .classpath
 .settings
